@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 
 
 class UserProfileManager(BaseUserManager):
-    """Manager fro user profiles"""
+    """Manager for user profiles"""
 
     def create_user(self, email, name, password=None):
         """Create a new user profile"""
@@ -44,7 +44,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         """ Retrieve full name of user"""
-        return self.get_full_name
+        return self.name
 
     def get_short_name(self):
         """Retrieve short name of user"""
