@@ -13,7 +13,8 @@ locale-gen en_GB.UTF-8
 # Install Python, SQLite and pip
 echo "Installing dependencies..."
 apt-get update
-apt-get install -y python3-dev python3-venv sqlite3 python3-pip supervisor nginx git
+# CHANGED: 'sqlite' and 'python-pip' to 'libsqlite3-dev' and 'python3-pip'
+apt-get install -y python3-dev python3-venv libsqlite3-dev python3-pip supervisor nginx git
 
 mkdir -p $PROJECT_BASE_PATH
 git clone $PROJECT_GIT_URL $PROJECT_BASE_PATH
@@ -35,6 +36,7 @@ supervisorctl restart profiles_api
 cp $PROJECT_BASE_PATH/deploy/nginx_profiles_api.conf /etc/nginx/sites-available/profiles_api.conf
 rm /etc/nginx/sites-enabled/default
 ln -s /etc/nginx/sites-available/profiles_api.conf /etc/nginx/sites-enabled/profiles_api.conf
-systemctl restart nginx.service
+# Optional change: used simpler service name 'nginx'
+systemctl restart nginx
 
 echo "DONE! :)"
